@@ -13,8 +13,8 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Login = () => {
     let [showPassword, setShowPassword] = useState(false);
-    let { SignInUser } = useContext(AuthContext)
-    let navigate = useNavigate()
+    let { setUser } = useContext(AuthContext);
+    let navigate = useNavigate();
     // let location = useLocation();
 
     let handleLogin = (e) => {
@@ -22,6 +22,7 @@ const Login = () => {
         let email = e.target.email.value;
         let password = e.target.password.value;
 
+        console.log(email, password);
     }
 
     return (
