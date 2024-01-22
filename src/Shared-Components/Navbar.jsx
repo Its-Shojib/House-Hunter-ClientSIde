@@ -8,10 +8,10 @@ const Navbar = () => {
 
     let links = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/available-food'>Available Food</NavLink></li>
-        <li><NavLink to='/add-food'>Add Food</NavLink></li>
-        <li><NavLink to='/manage-my-food'>Manage My Food</NavLink></li>
-        <li><NavLink to='/my-food-request'>My Food Request</NavLink></li>
+        <li><NavLink to='/all-house'>All House</NavLink></li>
+        <li><NavLink to='/contact-us'>Contact Us</NavLink></li>
+        <li><NavLink to='/about-us'>About Us</NavLink></li>
+        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
     </>
     return (
         <div>
