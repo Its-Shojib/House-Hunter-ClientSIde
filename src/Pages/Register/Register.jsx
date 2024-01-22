@@ -7,19 +7,15 @@ import { useContext, useState } from "react";
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import Lottie from "lottie-react";
-import { updateProfile } from 'firebase/auth'
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import auth from "../../Firebase/Firebase.config";
 import animation from './../../../src/assets/SignUpAnimation.json'
-import { Helmet } from "react-helmet-async";
-import useAuth from "../../Hooks/useAuth";
 
 
 const Register = () => {
 
     let [showPassword, setShowPassword] = useState(false);
-    let { createUser, googleSignIn } = useContext(AuthContext);
-    let {user,setUser} = useAuth()
+    let { createUser } = useContext(AuthContext);
+
 
     let navigate = useNavigate()
     let handleCreateUser = (e) => {
@@ -58,34 +54,6 @@ const Register = () => {
 
         createUser(email, password)
             .then(() => {
-                updateProfile(auth.currentUser, {
-                    displayName: myname, photoURL: myphoto
-                })
-                    .then(() => {
-                        setUser({...user, photoURL: myphoto,displayName:myname});
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'User Created Successfully',
-                            icon: 'Success',
-                            confirmButtonText: 'Cool'
-                        })
-                    })
-                navigate('/')
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: `${error.message}`,
-                })
-            })
-
-
-    }
-    let handleGoogleLogin = () => {
-        googleSignIn()
-            .then(result => {
-                console.log(result.user);
                 Swal.fire({
                     title: 'Success!',
                     text: 'User Created Successfully',
@@ -102,12 +70,11 @@ const Register = () => {
                 })
             })
 
+
     }
+
     return (
         <div className="flex flex-col md:flex-row gap-5 px-2 justify-center items-center mt-5">
-            <Helmet>
-                <title>Meal Miracle | Register</title>
-            </Helmet>
             <div className="bg-gray-400 w-full md:w-5/12 text-center p-10 rounded-lg">
                 <h2 className="text-3xl font-bold mb-2">Register Now!</h2>
                 <form onSubmit={handleCreateUser}>
@@ -158,10 +125,6 @@ const Register = () => {
 
                 </form>
 
-                <p className="mt-3">Or Sign up using</p>
-                <div className="flex gap-3 justify-center my-3">
-                    <img onClick={handleGoogleLogin} className="w-8 cursor-pointer" src="/google.jpg" alt="" />
-                </div>
                 <div className="flex gap-3 justify-center mt-3">
                     <p>Already have an account?</p>
                     <Link className="underline text-lg text-blue-600" to='/login'>Login now</Link>
