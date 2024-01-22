@@ -22,25 +22,6 @@ const Login = () => {
         let email = e.target.email.value;
         let password = e.target.password.value;
 
-        SignInUser(email, password)
-            .then(result => {
-                console.log(result.user);
-                e.target.reset();
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'User Login Successfully',
-                    icon: 'Success',
-                    confirmButtonText: 'Cool'
-                })
-                navigate('/');
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: `${error.message}`,
-                })
-            })
     }
 
     return (
