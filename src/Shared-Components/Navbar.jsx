@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import useOwner from "../Hooks/useOwner";
 
 
 
 const Navbar = () => {
     let { user, setUser } = useContext(AuthContext);
+    let [isOwner] = useOwner();
 
     let handleLogout = () => {
         setUser(null);
@@ -13,14 +15,16 @@ const Navbar = () => {
 
     let links = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/all-house'>All House</NavLink></li>
         <li><NavLink to='/contact-us'>Contact Us</NavLink></li>
         <li><NavLink to='/about-us'>About Us</NavLink></li>
-        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+        {
+            isOwner? <li><NavLink to='/dashboard/manage-house'>Dashboard</NavLink></li> : <li><NavLink to='/dashboard/manage-booking'>Dashboard</NavLink></li>
+        }
+        
     </>
     return (
         <div>
-            <div className="navbar bg-[#314b5c]">
+            <div className="navbar bg-[#122837] md:px-5">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden text-white">
@@ -41,20 +45,6 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end text-white">
-                    {/* {
-                        user && <>
-                            <div className="dropdown dropdown-end">
-                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                    <div className="w-10 rounded-full">
-                                        <img src={user?.photoURL} />
-                                    </div>
-                                </label>
-                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-500 rounded-box w-28">
-                                    <li>{user.displayName}</li>
-                                </ul>
-                            </div>
-                        </>
-                    } */}
                     {
                         user ? <button onClick={handleLogout} className="bg-red-600 px-4 py-2 rounded-md font-semibold">Log Out</button> : <button className=" bg-green-600 px-4 py-2 rounded-md font-semibold"><NavLink to='/login'>Login</NavLink></button>
                     }
