@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { BsTwitter, BsLinkedin, BsFacebook } from 'react-icons/bs';
 const Footer = () => {
     return (
-        <div className="bg-[#122837] text-white">
+        <div className="bg-[#122837] text-white mt-10">
             <footer className="footer p-10">
                 <Link>
                     <img className="w-20" src="/House Hunter.png" alt="" />
