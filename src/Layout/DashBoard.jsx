@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { FaBookDead, FaEdit, FaHome, FaPhone, FaSignOutAlt } from 'react-icons/fa';
+import { FaEdit, FaHome, FaPhone, FaSignOutAlt } from 'react-icons/fa';
 
 import { MdOutlineWorkspacePremium } from "react-icons/md";
 import useOwner from '../Hooks/useOwner';
@@ -33,11 +33,6 @@ const DashBoard = () => {
                                 </li>
                                 <li >
                                     <NavLink className='flex items-center font-bold gap-2'
-                                        to='booking-house' >
-                                        <FaBookDead></FaBookDead>Booking House</NavLink>
-                                </li>
-                                <li >
-                                    <NavLink className='flex items-center font-bold gap-2'
                                         to='add-new-house' ><MdOutlineWorkspacePremium />Add New House</NavLink>
                                 </li>
                                 <li >
@@ -65,7 +60,7 @@ const DashBoard = () => {
                                 to='/' >
                                 <FaHome></FaHome>Home</NavLink>
                         </li>
-                        
+
                         <li >
                             <NavLink className='flex items-center font-bold gap-2'
                                 to='/about-us' >

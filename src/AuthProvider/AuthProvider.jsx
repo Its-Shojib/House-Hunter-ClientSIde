@@ -47,6 +47,8 @@ const AuthProvider = ({ children }) => {
         // return () => clearInterval(intervalId);
 
         return () => {
+            // checkAuthStatus();
+            // retrieveUserFromLocalStorage();
             clearInterval(intervalId);
             clearInterval(intervalId2);
         }
@@ -66,7 +68,7 @@ const AuthProvider = ({ children }) => {
     const authInfo = {
         user,
         loading,
-        setUser: handleUserChange,
+        setUser: handleUserChange
     };
 
     return (

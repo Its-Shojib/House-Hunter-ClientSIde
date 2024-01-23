@@ -1,17 +1,20 @@
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useContext } from "react";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddNewHouse = () => {
+const UpdateHouse = () => {
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
+    let goto = useNavigate();
 
-    let { user } = useContext(AuthContext)
+    let house = useLoaderData();
+    console.log(house);
+    let { _id, phone, city, bedrooms, bathrooms, availability, rentPerMonth, description, roomSize } = house;
+
     const onSubmit = async (data) => {
         // console.log(data)
         // image upload to imgbb and then get an url
@@ -24,9 +27,7 @@ const AddNewHouse = () => {
         if (res.data.success) {
             // now send the menu item data to the server with the image url
 
-            const houseItems = {
-                ownerName: user?.myName,
-                email: user?.email,
+            const updatedHouse = {
                 image: res?.data?.data?.display_url,
                 city: data?.city,
                 bedrooms: data?.bedrooms,
@@ -37,19 +38,20 @@ const AddNewHouse = () => {
                 description: data?.desc,
                 phone: data?.phone
             }
-            console.log(houseItems);
 
-            await axiosPublic.post('/addnew-house', houseItems)
+            await axiosPublic.patch(`/update-house/${_id}`, updatedHouse)
                 .then(res => {
-                    if (res?.data?.insertedId) {
+                    console.log(res);
+                    if (res?.data?.modifiedCount > 0) {
                         reset();
                         Swal.fire({
                             position: "top-middle",
                             icon: "success",
-                            title: 'House Added Successfully',
+                            title: 'House Update Successfully',
                             showConfirmButton: false,
                             timer: 1500
                         });
+                        goto('/dashboard/manage-house');
                     }
                 })
 
@@ -69,7 +71,7 @@ const AddNewHouse = () => {
                                 </label>
                                 <input
                                     type="number"
-                                    label="Phone Number"
+                                    defaultValue={phone}
                                     {...register('phone', { required: true })}
                                     className="w-full p-2" />
                             </div>
@@ -79,7 +81,7 @@ const AddNewHouse = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    label="City"
+                                    defaultValue={city}
                                     {...register('city', { required: true })}
                                     className="w-full p-2" />
                             </div>
@@ -91,7 +93,7 @@ const AddNewHouse = () => {
                                 </label>
                                 <input
                                     type="number"
-                                    label="Bed Rooms"
+                                    defaultValue={bedrooms}
                                     {...register('bedrooms', { required: true })}
                                     required
                                     className="w-full p-2" />
@@ -102,7 +104,7 @@ const AddNewHouse = () => {
                                 </label>
                                 <input
                                     type="number"
-                                    label="Bath Rooms"
+                                    defaultValue={bathrooms}
                                     {...register('bathrooms', { required: true })}
                                     required
                                     className=" w-full p-2" />
@@ -119,7 +121,11 @@ const AddNewHouse = () => {
                                 <label className="label">
                                     <span className="label-text">Room Size*</span>
                                 </label>
-                                <input {...register('roomSize', { required: true })} type="text" className=" w-full p-2" />
+                                <input
+                                    defaultValue={roomSize}
+                                    {...register('roomSize', { required: true })}
+                                    type="text"
+                                    className=" w-full p-2" />
                             </div>
                         </div>
                         <div className="flex gap-10 my-5">
@@ -127,7 +133,9 @@ const AddNewHouse = () => {
                                 <label className="label">
                                     <span className="label-text">Avaibility*</span>
                                 </label>
-                                <select defaultValue="default" {...register('availability', { required: true })}
+                                <select
+                                    defaultValue={availability}
+                                    {...register('availability', { required: true })}
                                     className="select select-bordered w-full py-2">
                                     <option disabled value="default">Select One</option>
                                     <option value="true">Available</option>
@@ -139,12 +147,16 @@ const AddNewHouse = () => {
                                 <label className="label">
                                     <span className="label-text">Rent Per Month*</span>
                                 </label>
-                                <input {...register('rentPerMonth', { required: true })} type="number" className=" w-full p-2" />
+                                <input
+                                    defaultValue={rentPerMonth}
+                                    {...register('rentPerMonth', { required: true })}
+                                    type="number"
+                                    className=" w-full p-2" />
                             </div>
                         </div>
                         <div className="py-5">
                             <textarea
-                                placeholder="Write Descriptions"
+                                defaultValue={description}
                                 {...register('desc', { required: true })}
                                 cols="40"
                                 rows="5">
@@ -153,7 +165,7 @@ const AddNewHouse = () => {
                         </div>
                         <button
                             className="block w-full text-lg bg-green-950 text-white px-4 py-2 rounded-md" type="submit">
-                            Save & Publish Now!
+                            Update & Publish Now!
                         </button>
                     </form>
                 </div>
@@ -161,4 +173,4 @@ const AddNewHouse = () => {
         </div >
     )
 }
-export default AddNewHouse;
+export default UpdateHouse;

@@ -9,10 +9,10 @@ import DashBoard from "../Layout/DashBoard";
 import PrivateRoutes from "./PrivateRoutes";
 import OwnerRoute from "./OwnerRoute";
 import ManageHouse from "../Pages/ManageHouse/ManageHouse";
-import BookingHouse from "../Pages/BookingHouse/BookingHouse";
 import AddNewHouse from "../Pages/AddNewHouse/AddNewHouse";
 import ManageBooking from "../Pages/ManageBooking/ManageBooking";
 import ViewDetails from "../Pages/ViewDetails/ViewDetails";
+import UpdateHouse from "../Pages/UpdateHouse/UpdateHouse";
 
 
 const router = createBrowserRouter([
@@ -34,8 +34,13 @@ const router = createBrowserRouter([
             },
             {
                 path: '/houses/:id',
-                loader: ({params})=> fetch(`http://localhost:5000/houses/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/houses/${params.id}`),
                 element: <PrivateRoutes><ViewDetails></ViewDetails> </PrivateRoutes>
+            },
+            {
+                path: '/update/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/update/${params.id}`),
+                element: <PrivateRoutes><UpdateHouse></UpdateHouse></PrivateRoutes>
             },
             {
                 path: '/login',
@@ -50,7 +55,7 @@ const router = createBrowserRouter([
     {
         path: 'dashboard',
         element: <PrivateRoutes><DashBoard></DashBoard></PrivateRoutes>,
-        children:[
+        children: [
             //Owner Route
             {
                 path: 'manage-house',
@@ -58,12 +63,13 @@ const router = createBrowserRouter([
                 element: <OwnerRoute><ManageHouse></ManageHouse></OwnerRoute>
             },
             {
-                path: 'booking-house',
-                element: <OwnerRoute><BookingHouse></BookingHouse></OwnerRoute>
-            },
-            {
                 path: 'add-new-house',
                 element: <OwnerRoute><AddNewHouse></AddNewHouse></OwnerRoute>
+            },
+            {
+                path: 'manage-house/update/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/update/${params.id}`),
+                element: <PrivateRoutes><UpdateHouse></UpdateHouse></PrivateRoutes>
             },
             //Renter Route
             {
