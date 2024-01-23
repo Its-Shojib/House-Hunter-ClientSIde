@@ -12,6 +12,7 @@ import ManageHouse from "../Pages/ManageHouse/ManageHouse";
 import BookingHouse from "../Pages/BookingHouse/BookingHouse";
 import AddNewHouse from "../Pages/AddNewHouse/AddNewHouse";
 import ManageBooking from "../Pages/ManageBooking/ManageBooking";
+import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 
 
 const router = createBrowserRouter([
@@ -28,8 +29,13 @@ const router = createBrowserRouter([
                 element: <AboutUs></AboutUs>
             },
             {
-                path: 'contact-us',
+                path: '/contact-us',
                 element: <ContactUs></ContactUs>
+            },
+            {
+                path: '/houses/:id',
+                loader: ({params})=> fetch(`http://localhost:5000/houses/${params.id}`),
+                element: <PrivateRoutes><ViewDetails></ViewDetails> </PrivateRoutes>
             },
             {
                 path: '/login',

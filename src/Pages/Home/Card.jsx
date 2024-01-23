@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const Card = ({ item }) => {
     let goto = useNavigate();
@@ -13,12 +13,14 @@ const Card = ({ item }) => {
                 <p className="text-gray-700 text-base mb-2">Room Size: {roomSize}</p>
                 <p className="text-gray-700 text-base mb-2">Bedrooms: {bedrooms}</p>
                 <button className="bg-green-950 text-white px-4 py-2 rounded-lg mx-auto w-full"
-                onClick={() => goto(`houses/${_id}`)}>
+                onClick={() => goto(`/houses/${_id}`)}>
                         View Details
                 </button>
             </div>
         </div>
     );
 };
-
+Card.propTypes = {
+    item: PropTypes.node,
+}
 export default Card;
