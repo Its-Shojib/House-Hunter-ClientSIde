@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let axiosPublic = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://house-hunter-server-ashy-omega.vercel.app'
 })
 
 const useAxiosPublic = () => {

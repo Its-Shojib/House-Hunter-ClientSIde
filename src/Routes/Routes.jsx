@@ -34,13 +34,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/houses/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/houses/${params.id}`),
+                loader: ({ params }) => fetch(`https://house-hunter-server-ashy-omega.vercel.app/houses/${params.id}`),
                 element: <PrivateRoutes><ViewDetails></ViewDetails> </PrivateRoutes>
-            },
-            {
-                path: '/update/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/update/${params.id}`),
-                element: <PrivateRoutes><UpdateHouse></UpdateHouse></PrivateRoutes>
             },
             {
                 path: '/login',
@@ -68,7 +63,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'manage-house/update/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/update/${params.id}`),
+                loader: ({ params }) => fetch(`https://house-hunter-server-ashy-omega.vercel.app/update/${params.id}`),
                 element: <PrivateRoutes><UpdateHouse></UpdateHouse></PrivateRoutes>
             },
             //Renter Route

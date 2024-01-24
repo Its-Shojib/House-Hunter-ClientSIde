@@ -6,6 +6,7 @@ import Card from "./Card";
 
 const Home = () => {
     let [houseCollection] = useLoadHouse();
+    console.log(houseCollection);
     const [searchCity, setSearchCity] = useState('');
     const [searchBedrooms, setSearchBedrooms] = useState('');
     const [searchBathrooms, setSearchBathrooms] = useState('');
@@ -13,8 +14,10 @@ const Home = () => {
     const [searchAvailability, setSearchAvailability] = useState('');
     const [searchRentPerMonth, setSearchRentPerMonth] = useState('');
 
-    const [filteredHouses, setFilteredHouses] = useState(houseCollection);
+    const [filteredHouses, setFilteredHouses] = useState([]);
 
+    setFilteredHouses(houseCollection);
+    console.log(filteredHouses);
     const handleSearch = () => {
         // Filter houses based on specified criteria
         let result = [...houseCollection];

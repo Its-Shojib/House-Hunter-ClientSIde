@@ -66,6 +66,7 @@ const Register = () => {
                     });
                     SetError('');
                     setUser(User);
+                    localStorage.setItem('user', JSON.stringify(User));
                     navigate('/')
                 }
             })

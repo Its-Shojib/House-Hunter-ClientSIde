@@ -11,6 +11,7 @@ const Navbar = () => {
 
     let handleLogout = () => {
         setUser(null);
+        localStorage.removeItem('user');
     }
 
     let links = <>
@@ -35,7 +36,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="flex justify-center items-center gap-2">
-                        <Link><img className="w-16 h-16" src="/public/House Hunter.png" alt="" /></Link>
+                        <Link><img className="w-16 h-16" src="/House Hunter.png" alt="" /></Link>
                         <h2 className="text-white text-xl md:text-3xl font-bold">House Hunter</h2>
                     </div>
                 </div>

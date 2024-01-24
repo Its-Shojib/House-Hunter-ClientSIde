@@ -57,6 +57,7 @@ const Login = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    localStorage.setItem('user', JSON.stringify(res?.data));
                     navigate('/');
                 }
             })

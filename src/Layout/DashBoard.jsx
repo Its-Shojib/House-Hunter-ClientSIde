@@ -14,6 +14,7 @@ const DashBoard = () => {
 
     let handleLogout = () => {
         setUser(null);
+        localStorage.removeItem('user');
     }
 
     return (

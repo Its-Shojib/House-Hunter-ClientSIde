@@ -18,29 +18,29 @@ const AuthProvider = ({ children }) => {
         };
 
         setLoading(false);
-        console.log('observing: ', user?.myName);
-        let data = user?.email;
-        const checkAuthStatus = async () => {
-            try {
-                if(user){
-                    axiosPublic.post('/jwt',{data})
-                    .then(res=>{
-                        if(res.data.token){
-                            localStorage.setItem('access-token', res.data.token);
-                            setLoading(false);
-                        }
-                    })
-                }
-                else{
-                    localStorage.removeItem('access-token');
-                    setLoading(false);
-                }
-            } catch (error) {
-                console.error('Error checking authentication status:', error);
-            }
-        };
+        console.log('observing: ', user);
+        // let data = user?.email;
+        // const checkAuthStatus = async () => {
+        //     try {
+        //         if(user){
+        //             axiosPublic.post('/jwt',{data})
+        //             .then(res=>{
+        //                 if(res.data.token){
+        //                     localStorage.setItem('access-token', res.data.token);
+        //                     setLoading(false);
+        //                 }
+        //             })
+        //         }
+        //         else{
+        //             localStorage.removeItem('access-token');
+        //             setLoading(false);
+        //         }
+        //     } catch (error) {
+        //         console.error('Error checking authentication status:', error);
+        //     }
+        // };
 
-        const intervalId = setInterval(checkAuthStatus, 1000);
+        // const intervalId = setInterval(checkAuthStatus, 1000);
         const intervalId2 = setInterval(retrieveUserFromLocalStorage, 2000);
 
         // Cleanup the interval on component unmount
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
         return () => {
             // checkAuthStatus();
             // retrieveUserFromLocalStorage();
-            clearInterval(intervalId);
+            // clearInterval(intervalId);
             clearInterval(intervalId2);
         }
     }, [user, axiosPublic]);
@@ -65,10 +65,28 @@ const AuthProvider = ({ children }) => {
         });
     };
 
+    // useEffect(() => {
+    //     const storedUser = localStorage.getItem('user');
+    //     if (storedUser) {
+    //         setUser(JSON.parse(storedUser));
+    //         console.log('observing: ', user?.myName);
+    //         return setLoading(false);
+
+    //     }
+    // }, [user])
+    // useEffect(() => {
+    //     const storedUser = localStorage.getItem('user');
+    //     if (storedUser) {
+    //         setUser(JSON.parse(storedUser));
+    //     }
+
+    // }, [user])
+
     const authInfo = {
         user,
         loading,
         setUser: handleUserChange
+        // setUser
     };
 
     return (

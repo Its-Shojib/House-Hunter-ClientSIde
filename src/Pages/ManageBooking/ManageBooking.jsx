@@ -40,7 +40,7 @@ const ManageBooking = () => {
                     {manageBookings?.map((house, index) => (
                         <tr key={index}>
                             <td className="border p-2">
-                                <img className="w-16 h-16 object-cover" src={house.image} alt="Property" />
+                                <img className="w-20 h-20 object-cover rounded-full" src={house.image} alt="Property" />
                             </td>
                             <td className="border p-2">{house.ownerName}</td>
                             <td className="border p-2">{house.city}</td>
