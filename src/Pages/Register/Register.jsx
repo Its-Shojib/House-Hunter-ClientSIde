@@ -31,7 +31,7 @@ const Register = () => {
 
         let User = { myName, role, phone, email, password };
 
-        let user = {email};
+        let user = { email };
 
         if (password.length < 6) {
             SetError('Password must be more than 6 character')
@@ -72,7 +72,6 @@ const Register = () => {
                     navigate('/')
                 }
             })
-
     }
 
     return (
