@@ -31,6 +31,8 @@ const Register = () => {
 
         let User = { myName, role, phone, email, password };
 
+        let user = {email};
+
         if (password.length < 6) {
             SetError('Password must be more than 6 character')
             return;
@@ -65,8 +67,8 @@ const Register = () => {
                         timer: 1500
                     });
                     SetError('');
-                    setUser(User);
-                    localStorage.setItem('user', JSON.stringify(User));
+                    setUser(user);
+                    localStorage.setItem('user', JSON.stringify(user));
                     navigate('/')
                 }
             })
