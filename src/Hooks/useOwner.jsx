@@ -3,8 +3,6 @@ import useAxiosPublic from "./useAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
-
-//check Owner or not
 const useOwner = () => {
     const { user, loading } = useContext(AuthContext);
     let axiosPublic = useAxiosPublic();
