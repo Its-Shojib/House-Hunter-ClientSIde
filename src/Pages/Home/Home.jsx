@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useLoadHouse from "../../Hooks/useLoadHouse";
 import Banner from "./Banner";
 import Card from "./Card";
@@ -15,8 +15,11 @@ const Home = () => {
     const [searchRentPerMonth, setSearchRentPerMonth] = useState('');
 
     const [filteredHouses, setFilteredHouses] = useState([]);
+    useEffect(() => {
+        setFilteredHouses(houseCollection);
+    }, [houseCollection])
 
-    setFilteredHouses(houseCollection);
+    // setFilteredHouses(houseCollection);
     console.log(filteredHouses);
     const handleSearch = () => {
         // Filter houses based on specified criteria

@@ -16,7 +16,6 @@ const Login = () => {
     let [showPassword, setShowPassword] = useState(false);
     let { setUser } = useContext(AuthContext);
     let navigate = useNavigate();
-    // let location = useLocation();
 
     let axiosPublic = useAxiosPublic();
 
@@ -26,10 +25,12 @@ const Login = () => {
         let password = e.target.password.value;
 
         let auth = { email, password };
+        let user = {
+            email
+        }
 
         axiosPublic.post('/login', auth)
             .then(res => {
-                // console.log(res);
                 if (res?.data === 'Wrong Pass') {
                     Swal.fire({
                         position: "top",
@@ -49,7 +50,7 @@ const Login = () => {
                     });
                 }
                 else {
-                    setUser(res?.data);
+                    setUser(user);
                     Swal.fire({
                         position: "top",
                         icon: "success",
@@ -57,7 +58,7 @@ const Login = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    localStorage.setItem('user', JSON.stringify(res?.data));
+                    localStorage.setItem("user", JSON.stringify(user));
                     navigate('/');
                 }
             })
