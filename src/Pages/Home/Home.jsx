@@ -6,7 +6,6 @@ import Card from "./Card";
 
 const Home = () => {
     let [houseCollection] = useLoadHouse();
-    console.log(houseCollection);
     const [searchCity, setSearchCity] = useState('');
     const [searchBedrooms, setSearchBedrooms] = useState('');
     const [searchBathrooms, setSearchBathrooms] = useState('');
@@ -54,10 +53,10 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <div className="text-center text-6xl  my-10">
-                All Cards Are Here
+            <div className="text-center text-5xl  my-10 font-bold">
+                All Houses
             </div>
-            <div className="w-11/12 mx-auto flex items-center justify-center gap-5 my-10">
+            <div className="w-full mx-auto flex items-center justify-center gap-3 my-10 bg-sky-950 p-5">
                 {/* City Search */}
                 <div className="mb-4">
                     <input
@@ -133,7 +132,7 @@ const Home = () => {
                     </button>
                 </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10">
                 {
                     filteredHouses?.map(item => <Card
                         key={item._id}
